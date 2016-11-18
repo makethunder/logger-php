@@ -1,0 +1,10 @@
+<phpunit bootstrap="test/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Logger Tests">
+            <directory>./test/PaperG/LoggerTest</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <includePath>.</includePath>
+    </php>
+</phpunit>
