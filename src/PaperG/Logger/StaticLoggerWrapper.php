@@ -1,6 +1,8 @@
 <?php
 
 namespace PaperG\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use InvalidArgumentException;
 
@@ -249,5 +251,17 @@ abstract class StaticLoggerWrapper {
         self::validateMessage($message);
         $contextExists = func_num_args() >= 2; // Distinguish debug($m, null) vs. debug($m)
         static::getLogger()->debug($message, self::makeContextArray($context, $contextExists, $tags));
+    }
+
+    /**
+     * Allows specific implementations to use different handlers
+     *
+     * @param $streamHandler StreamHandler
+     */
+    public static function pushHandler($streamHandler)
+    {
+        /* @var $monologLogger Logger */
+        $monologLogger = static::getLogger();
+        $monologLogger->pushHandler($streamHandler);
     }
 }
